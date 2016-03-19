@@ -63,4 +63,12 @@ CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
     end
   end
 
+  def update(options = {})
+    Product.destroy(id)
+    brand = options[:brand] if options[:brand]
+    name = options[:name] if options[:name]
+    price = options[:price] if options[:price]
+    Product.create(id: id, brand: brand, name: name, price: price)
+  end
+
 end
