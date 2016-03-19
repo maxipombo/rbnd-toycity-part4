@@ -49,7 +49,7 @@ CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
 
   def self.rewrite_csv(products)
     CSV.open(CSV_FILE, 'wb') do |csv|
-      csv << %w(id brand name price)
+      csv << %w(id brand product price)
       products.each do |product|
         csv << [product.id, product.brand, product.name, product.price]
       end
