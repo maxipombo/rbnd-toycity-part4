@@ -24,6 +24,7 @@ class Product < Udacidata
     CSV.open(CSV_FILE, 'ab') do |csv|
       csv << [product.id, product.brand, product.name, product.price]
     end
+    product
   end
 
   private
