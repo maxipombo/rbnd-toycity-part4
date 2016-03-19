@@ -3,6 +3,8 @@ require_relative 'udacidata'
 class Product < Udacidata
   attr_reader :id, :price, :brand, :name
 
+  CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
+
   def initialize(opts={})
 
     # Get last ID from the database if ID exists
@@ -17,6 +19,13 @@ class Product < Udacidata
     @price = opts[:price]
   end
 
+  def self.create(options = {})
+    product = new(options)
+    CSV.open(CSV_FILE, 'ab') do |csv|
+      csv << [product.id, product.brand, product.name, product.price]
+    end
+  end
+
   private
 
     # Reads the last line of the data file, and gets the id if one exists
@@ -24,7 +33,7 @@ class Product < Udacidata
     # Otherwise, use 0 as starting ID number
     def get_last_id
       file = File.dirname(__FILE__) + "/../data/data.csv"
-      last_id = File.exist?(file) ? CSV.read(file).last[0].to_i + 1 : nil
+      last_id = File.exist?(CSV_FILE) ? CSV.read(CSV_FILE).last[0].to_i + 1 : nil
       @@count_class_instances = last_id || 0
     end
 
