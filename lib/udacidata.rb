@@ -28,4 +28,9 @@ CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
   def self.first(*n)
     n[0] ? all.first(n[0]) : all.first
   end
+
+  def self.last(*n)
+    n[0] ? all.first(n[0]) : all.last
+  end
+
 end
