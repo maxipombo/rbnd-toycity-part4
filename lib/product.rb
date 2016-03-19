@@ -3,8 +3,6 @@ require_relative 'udacidata'
 class Product < Udacidata
   attr_reader :id, :price, :brand, :name
 
-  CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
-
   def initialize(opts={})
 
     # Get last ID from the database if ID exists
@@ -17,24 +15,6 @@ class Product < Udacidata
     @brand = opts[:brand]
     @name = opts[:name]
     @price = opts[:price]
-  end
-
-  def self.create(options = {})
-    product = new(options)
-    CSV.open(CSV_FILE, 'ab') do |csv|
-      csv << [product.id, product.brand, product.name, product.price]
-    end
-    product
-  end
-
-  def self.all
-    CSV.read(CSV_FILE)
-    products = []
-    CSV.foreach(CSV_FILE, headers: true) do |row|
-      products << new(id: row[:id], brand: row[:brand], name: row[:name],
-      price: row[:price])
-    end
-    products
   end
 
   private
