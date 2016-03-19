@@ -56,4 +56,11 @@ CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
     end
   end
 
+  def self.where(options = {})
+    brand_products = []
+    if options[:brand]
+      brand_products = all.select { |product| product.brand == options[:brand] }
+    end
+  end
+
 end
