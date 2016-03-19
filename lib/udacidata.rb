@@ -33,4 +33,10 @@ CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
     n[0] ? all.first(n[0]) : all.last
   end
 
+  def self.find(id)
+    all.find do |product|
+      product.id == id
+    end
+  end
+
 end
