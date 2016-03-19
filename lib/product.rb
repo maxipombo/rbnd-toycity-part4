@@ -29,6 +29,12 @@ class Product < Udacidata
 
   def self.all
     CSV.read(CSV_FILE)
+    products = []
+    CSV.foreach(CSV_FILE, headers: true) do |row|
+      products << new(id: row[:id], brand: row[:brand], name: row[:name],
+      price: row[:price])
+    end
+    products
   end
 
   private
