@@ -39,4 +39,20 @@ CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
     end
   end
 
+  def self.destroy(id)
+    destroyed_product = find(id)
+    updated_products = all.delete_if { |product| product.id == id }
+    rewrite_csv(updated_products)
+    destroyed_product
+  end
+
+  def self.rewrite_csv(products)
+    CSV.open(CSV_FILE, 'wb') do |csv|
+      csv << %w(id brand product price)
+      products.each do |product|
+        csv << [product.id, product.brand, product.name, product.price]
+      end
+    end
+  end
+
 end
