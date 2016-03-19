@@ -3,8 +3,7 @@ require_relative 'errors'
 require 'csv'
 
 class Udacidata
-
-create_finder_methods :brand, :name
+create_finder_methods(:brand, :name)
 
 CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
 
@@ -19,12 +18,12 @@ CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
   end
 
   def self.all
-    @@products = []
+    products = []
     CSV.foreach(CSV_FILE, headers: true) do |row|
-      @@products << new(id: row['id'].to_i, brand: row['brand'], name: row['name'],
+      products << new(id: row['id'].to_i, brand: row['brand'], name: row['product'],
       price: row['price'])
     end
-    @@products
+    products
   end
 
   def self.first(*n)
@@ -50,7 +49,7 @@ CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
 
   def self.rewrite_csv(products)
     CSV.open(CSV_FILE, 'wb') do |csv|
-      csv << %w(id brand product price)
+      csv << %w(id brand name price)
       products.each do |product|
         csv << [product.id, product.brand, product.name, product.price]
       end
