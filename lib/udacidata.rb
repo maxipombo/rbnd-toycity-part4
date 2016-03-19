@@ -4,6 +4,8 @@ require 'csv'
 
 class Udacidata
 
+create_finder_methods :brand, :name
+
 CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
 
   def self.create(options = {})
