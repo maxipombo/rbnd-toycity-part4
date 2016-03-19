@@ -27,6 +27,10 @@ class Product < Udacidata
     product
   end
 
+  def self.all
+    CSV.read(CSV_FILE)
+  end
+
   private
 
     # Reads the last line of the data file, and gets the id if one exists
