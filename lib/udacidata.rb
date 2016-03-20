@@ -61,6 +61,11 @@ CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
     if options[:brand]
       brand_products = all.select { |product| product.brand == options[:brand] }
     end
+    name_products = []
+    if options[:name]
+      name_products = all.select { |product| product.name == options[:name] }
+    end
+    brand_products.concat(name_products)
   end
 
   def update(options = {})
