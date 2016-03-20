@@ -35,9 +35,11 @@ CSV_FILE = File.dirname(__FILE__) + '/../data/data.csv'
   end
 
   def self.find(id)
-    all.find do |product|
-      product.id == id
+    product = all.find { |product| product.id == id }
+    unless product
+      raise ProductNotFoundError, "Could not find a product with ID: #{id}"
     end
+    product
   end
 
   def self.destroy(id)
